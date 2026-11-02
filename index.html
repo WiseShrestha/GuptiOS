@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#c0c0c0"><meta name="description" content="Shresth Gupta — Computer Science + Business at KAIST. Explore my work, interests, and ideas on GuptiOS.">
+<title>GuptiOS — Shresth Gupta</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="desktop" aria-label="GuptiOS desktop">
+  <div class="wallpaper-vignette" aria-hidden="true"></div>
+  <div class="desktop-signature" aria-hidden="true"><span>GUPTI<span class="signature-os">OS</span></span><small>PERSONAL COMPUTER · EST. 2026</small></div>
+  <nav id="shortcuts" aria-label="Desktop applications"></nav>
+  <div id="windows"></div>
+  <div class="desktop-caption"><span class="tiny-led"></span> A little corner of the internet.<span class="caption-hint">Click an icon. Stay a while.</span></div>
+  <footer class="taskbar" aria-label="Taskbar">
+    <button class="bevel start-button" id="start-button" aria-expanded="false" aria-controls="start-menu"><span id="start-icon"></span><b>Start</b></button>
+    <div class="divider"></div><button class="quicklaunch" id="show-desktop" aria-label="Show desktop" title="Show desktop"></button>
+    <div class="divider"></div><div id="task-buttons" class="task-buttons" aria-label="Open windows"></div>
+    <div class="system-tray"><span class="tray-label">GuptiOS</span><button id="sound-button" aria-label="Enable interface sounds" title="Interface sounds: off"></button><button id="clock-button" aria-label="Open calendar" aria-expanded="false"><time id="clock"></time></button></div>
+  </footer>
+  <section id="start-menu" class="start-menu bevel hidden" aria-label="Start menu"><aside>Gupti<b>OS</b><small>PERSONAL EDITION</small></aside><div class="start-items" id="start-items"></div></section>
+  <section id="context-menu" class="popup bevel hidden" aria-label="Desktop menu"><button data-action="arrange">Arrange icons</button><button data-action="refresh">Refresh desktop</button><hr><button data-action="settings">Properties</button></section>
+  <section id="calendar" class="calendar bevel hidden" aria-label="Calendar"></section>
+  <div id="toast" class="toast bevel hidden" role="status"></div>
+</main>
+<section id="boot" class="boot" aria-label="GuptiOS startup"><div class="boot-panel"><div class="boot-brand"><span class="boot-logo" id="boot-logo"></span><div>Gupti<span>OS</span><small>PERSONAL EDITION</small></div></div><p class="boot-version">A familiar place. A new beginning.</p><div class="boot-progress"><i></i></div><div class="boot-bottom"><span id="boot-status">Starting your desktop…</span><button id="skip-boot">Skip intro ↵</button></div></div><small class="boot-footer">© 2026 GuptiOS · Made for the curious.</small></section>
+<script src="app.js"></script>
+</body></html>
