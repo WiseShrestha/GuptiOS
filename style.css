@@ -91,3 +91,14 @@
 
 .profile-photo{margin:0;padding:5px;background:#c0c0c0;box-shadow:inset 1px 1px #fff,inset -1px -1px #444;border:1px solid #777;flex:0 0 160px}.profile-photo img{display:block;width:100%;height:auto;border:1px solid #555}.profile-photo figcaption{padding:7px 2px 2px;text-align:center;font:9px monospace;letter-spacing:1px;color:#333}.profile-header>div{min-width:0}
 @media(max-width:600px){.profile-header{flex-direction:column;align-items:center;text-align:center;gap:20px}.profile-photo{flex:none;width:180px}.profile-header>div{width:100%}}
+
+/* Sunset keeps the meadow silhouette and warms the light along its horizon. */
+.sunset #desktop,.sunset .monitor-screen{background-blend-mode:multiply,normal}
+.sunset .wallpaper-vignette{background:linear-gradient(180deg,#20152f55,transparent 57%,#160f243d)}
+#sunset-toggle{width:28px;min-height:26px;font: bold 20px/1 Georgia,serif}
+.wall-options{flex-wrap:wrap}
+.sunset :is(.window,.taskbar,.start-menu,.popup,.calendar,.toast){filter:invert(.91) hue-rotate(168deg)}
+.sunset :is(.window,.taskbar,.start-menu,.popup,.calendar,.toast) :is(img,video,iframe,.pixel-icon,.monitor-screen){filter:hue-rotate(-168deg) invert(1)}
+.sunset .window .titlebar,.sunset .start-menu aside{background:linear-gradient(90deg,#917d4f,#bf927b);color:#15121a}
+.sunset .window.inactive .titlebar{background:#aaa;color:#333}
+@media(max-width:600px){.system-tray #sunset-toggle{width:32px;min-height:32px}}
