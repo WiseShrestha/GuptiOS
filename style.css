@@ -104,5 +104,9 @@
 @media(max-width:600px){.system-tray #sunset-toggle{width:32px;min-height:32px}}
 
 
-.ash-wall{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-@media(prefers-reduced-motion:reduce){.ash-wall{display:none}}
+/* A brief change of light; desktop geometry stays still. */
+@media (prefers-reduced-motion:no-preference){
+ ::view-transition-old(root){animation:none;mix-blend-mode:normal}
+ ::view-transition-new(root){mix-blend-mode:normal;animation:evening-light 340ms cubic-bezier(.22,.65,.3,1) both}
+ @keyframes evening-light{from{opacity:0}to{opacity:1}}
+}
