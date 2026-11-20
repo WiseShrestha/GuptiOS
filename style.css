@@ -102,3 +102,5 @@
 .sunset .window .titlebar,.sunset .start-menu aside{background:linear-gradient(90deg,#917d4f,#bf927b);color:#15121a}
 .sunset .window.inactive .titlebar{background:#aaa;color:#333}
 @media(max-width:600px){.system-tray #sunset-toggle{width:32px;min-height:32px}}
+
+@media(prefers-reduced-motion:no-preference){::view-transition-old(root),::view-transition-new(root){animation-duration:520ms;animation-timing-function:ease-in-out}}
