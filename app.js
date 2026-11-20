@@ -105,29 +105,60 @@ function setupShelf(collectionId){
 
 function renderGuestNotes(){const container=$('#guest-notes');container.replaceChildren();const entries=safeRead('guptios-guestbook-v2',[]);if(!Array.isArray(entries))return;entries.forEach(n=>{const div=document.createElement('div');div.className='guest-entry';const b=document.createElement('b'),p=document.createElement('p'),t=document.createElement('time');b.textContent=n.name;p.textContent=n.message;t.textContent=new Date(n.date).toLocaleDateString();div.append(b,t,p);container.append(div)})}
 function setupTerminal(){const form=$('#terminal-form'),input=$('#terminal-input'),output=$('#terminal-output');let history=[],cursor=0;const print=text=>{const div=document.createElement('div');div.className='terminal-line';div.textContent=text;output.append(div)};form.onsubmit=e=>{e.preventDefault();const raw=input.value.trim(),cmd=raw.toLowerCase();input.value='';if(!raw)return;history.push(raw);cursor=history.length;print('C:\\GUPTI> '+raw);const aliases={about:'about',projects:'projects',bookshelf:'bookshelf',gaming:'gaming',travel:'travel',experience:'experience',achievements:'achievements',resume:'resume',notepad:'thoughts',thoughts:'thoughts',contact:'contact',music:'music',settings:'settings',readme:'readme'};if(cmd==='help')print('HELP        Show this list\nDIR         List desktop folders\nABOUT       Open About Me\nPROJECTS    Open Projects\nNOTEPAD     Open your local scratchpad\nMUSIC       Open Media Player\nSETTINGS    Change the wallpaper\nDATE        Show date and time\nVER         Show OS version\nCLS         Clear this screen\nEXIT        Close this window');else if(cmd==='dir')print(Object.keys(aliases).map(x=>'<DIR>  '+x.toUpperCase()).join('\n'));else if(cmd==='cls'||cmd==='clear')output.replaceChildren();else if(cmd==='date')print(new Date().toLocaleString());else if(cmd==='ver')print('GuptiOS 1.0 — Personal Edition');else if(cmd==='whoami')print('A curious visitor. Make yourself at home.');else if(cmd==='exit'){closeWindow('terminal');return}else if(aliases[cmd]){print('Opening '+apps[aliases[cmd]].name+'…');openApp(aliases[cmd])}else print('Unknown command. Type HELP to see what’s available.');input.scrollIntoView({block:'nearest'})};input.onkeydown=e=>{if(e.key==='ArrowUp'){e.preventDefault();cursor=Math.max(0,cursor-1);input.value=history[cursor]||''}if(e.key==='ArrowDown'){e.preventDefault();cursor=Math.min(history.length,cursor+1);input.value=history[cursor]||''}};input.focus({preventScroll:true})}
-let activeDust;
-function dustTransition(update,dusk){
- if(activeDust)activeDust();
- const layer=document.createElement('canvas'),w=innerWidth,h=innerHeight;
- layer.width=w;layer.height=h;layer.setAttribute('aria-hidden','true');
- layer.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20000;view-transition-name:theme-ash';
- const ctx=layer.getContext('2d');if(!ctx){update();return}
- const colors=dusk?['#edd3aa','#a48973','#564855','#2a2937']:['#ab7c79','#cb9981','#514757','#827180'];
- const grains=Array.from({length:Math.min(1100,Math.round(w*h/650))},()=>{const x=Math.random()*w,y=Math.random()*h;return {x,y,b:860*(x+128)/(w+256),life:190+Math.random()*225,v:20+Math.random()*85,r:1+Math.random()**2*4,s:Math.random()*7,c:colors[Math.floor(Math.random()*4)]}});
- let frame,stopped=false;
- const vt=document.startViewTransition(()=>{update();if(!stopped)document.body.append(layer)});
- function clean(){stopped=true;cancelAnimationFrame(frame);layer.remove();if(activeDust===stop)activeDust=null}
- function stop(){vt.skipTransition();clean()}
- activeDust=stop;
- vt.ready.then(()=>{if(stopped)return;const start=performance.now();function draw(now){const t=now-start;ctx.clearRect(0,0,w,h);for(const g of grains){const a=(t-g.b)/g.life;if(a<0||a>=1)continue;const r=g.r*(1-a*.75),x=g.x-a*g.v,y=g.y-a*a*g.v*.8+Math.sin(a*5+g.s)*a*12;ctx.globalAlpha=(1-a)*.92;ctx.fillStyle=g.c;ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r*1.6,y+r*.35);ctx.lineTo(x-r,y+r*.8);ctx.fill()}if(t<1120)frame=requestAnimationFrame(draw)}frame=requestAnimationFrame(draw)}).catch(()=>{});
- vt.finished.then(clean,clean)
+// Fracture the outgoing wallpaper itself; each shard carries its original pixels.
+const ashPhoto=new Image();ashPhoto.src='wallpaper.png';
+let stopAsh;
+function dustTransition(update){
+ if(stopAsh)stopAsh();
+ const layer=document.createElement('canvas');
+ const w=desktop.clientWidth,h=desktop.clientHeight,ctx=layer.getContext('2d');
+ if(!ctx||!w||!h||!ashPhoto.naturalWidth){update();return}
+ const style=getComputedStyle(desktop),oldSun=document.documentElement.classList.contains('sunset');
+ const res=Math.min(1,1280/w,900/h),W=layer.width=Math.ceil(w*res),H=layer.height=Math.ceil(h*res);
+ layer.className='ash-wall';layer.setAttribute('aria-hidden','true');
+ const source=document.createElement('canvas');source.width=W;source.height=H;
+ const tex=source.getContext('2d');tex.fillStyle=style.backgroundColor;tex.fillRect(0,0,W,H);
+ if(style.backgroundImage.includes('url(')){
+ const fit=safeRead('guptios-fit','cover')==='contain'?Math.min:Math.max;
+ const z=fit(W/ashPhoto.naturalWidth,H/ashPhoto.naturalHeight),iw=z*ashPhoto.naturalWidth,ih=z*ashPhoto.naturalHeight;
+ tex.drawImage(ashPhoto,(W-iw)/2,(H-ih)/2,iw,ih);
+ if(oldSun){const g=tex.createLinearGradient(0,0,0,H);[[0,'#322945'],[.4,'#914a63'],[.67,'#ff9960'],[.84,'#624650'],[1,'#352d40']].forEach(([p,c])=>g.addColorStop(p,c));tex.globalCompositeOperation='multiply';tex.fillStyle=g;tex.fillRect(0,0,W,H)}
+ }else if(style.backgroundImage!=='none'){const g=tex.createRadialGradient(W*.65,H*.7,0,W*.65,H*.7,W*.8);g.addColorStop(0,'#384551');g.addColorStop(1,'#172330');tex.fillStyle=g;tex.fillRect(0,0,W,H)}
+ const cell=Math.max(12,Math.sqrt(W*H/700)),nx=Math.ceil(W/cell),ny=Math.ceil(H/cell);
+ const points=Array.from({length:ny+1},(_,y)=>Array.from({length:nx+1},(_,x)=>[(x+(x&&x<nx?(Math.random()-.5)*.66:0))*W/nx,(y+(y&&y<ny?(Math.random()-.5)*.66:0))*H/ny]));
+ const pieces=[];
+ function shard(a,b,c){
+ const x=(a[0]+b[0]+c[0])/3,y=(a[1]+b[1]+c[1])/3;
+ const path=new Path2D();path.moveTo(...a);path.lineTo(...b);path.lineTo(...c);path.closePath();
+ const sx=Math.max(0,Math.floor(Math.min(a[0],b[0],c[0]))),sy=Math.max(0,Math.floor(Math.min(a[1],b[1],c[1])));
+ const sw=Math.ceil(Math.max(a[0],b[0],c[0]))-sx+1,sh=Math.ceil(Math.max(a[1],b[1],c[1]))-sy+1;
+ const start=Math.max(0,Math.min(800,80+560*(1-x/W)+80*Math.sin(y/H*13+x/W*5)+75*Math.cos(x/W*15-y/H*8)+100*Math.random()));
+ pieces.push({x,y,path,sx,sy,sw,sh,start,life:450+Math.random()*350,wind:(.06+.15*Math.random())*W,lift:(.035+.14*Math.random())*H,spin:(Math.random()-.5)*6,wave:Math.random()*7});
+ }
+ for(let y=0;y<ny;y++)for(let x=0;x<nx;x++){let a=points[y][x],b=points[y][x+1],c=points[y+1][x],d=points[y+1][x+1];if(Math.random()<.5){shard(a,b,d);shard(a,d,c)}else{shard(a,b,c);shard(b,d,c)}}
+ // Cache irregular fragments in one atlas; no pixel reads or per-frame clipping.
+ const slot=Math.ceil(cell*2)+6,cols=48,atlas=document.createElement('canvas');atlas.width=cols*slot;atlas.height=Math.ceil(pieces.length/cols)*slot;
+ const mask=atlas.getContext('2d');
+ pieces.forEach((g,i)=>{g.ax=i%cols*slot;g.ay=Math.floor(i/cols)*slot;mask.save();mask.translate(g.ax-g.sx,g.ay-g.sy);mask.clip(g.path);mask.drawImage(source,g.sx,g.sy,g.sw,g.sh,g.sx,g.sy,g.sw,g.sh);mask.restore()});
+ ctx.drawImage(source,0,0);desktop.prepend(layer);update();
+ let frame,begin=performance.now(),dead=false;
+ function stop(){dead=true;cancelAnimationFrame(frame);layer.remove();if(stopAsh===stop)stopAsh=null}
+ stopAsh=stop;
+ function draw(now){if(dead)return;const t=now-begin;ctx.resetTransform();ctx.clearRect(0,0,W,H);
+ for(const g of pieces){const a=Math.max(0,(t-g.start)/g.life);if(a>=1)continue;
+ const scale=1-a**1.45,angle=a*g.spin,dx=g.x+a*g.wind+Math.sin(g.wave+6*a)*a*10,dy=g.y-a*g.lift+Math.sin(g.wave+4*a)*a*15;
+ const co=scale*Math.cos(angle),si=scale*Math.sin(angle);
+ ctx.setTransform(co,si,-si,co,dx,dy);ctx.globalAlpha=1-a*a;
+ ctx.drawImage(atlas,g.ax,g.ay,g.sw,g.sh,g.sx-g.x,g.sy-g.y,g.sw,g.sh)}
+ if(t<1600)frame=requestAnimationFrame(draw);else stop()}
+ frame=requestAnimationFrame(draw)
 }
 function chooseTheme(next){
  const previous=safeRead('guptios-theme','meadow');
  if(previous===next)return;
  safeSave('guptios-theme',next);
  const update=()=>{if($('#fit-setting'))syncSettings();else applyTheme()};
- if((previous==='sunset'||next==='sunset') && document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){dustTransition(update,next==='sunset')}else{update()}
+ if((previous==='sunset'||next==='sunset') && !matchMedia('(prefers-reduced-motion: reduce)').matches){dustTransition(update)}else{update()}
 }
 function applyTheme(){const theme=safeRead('guptios-theme','meadow'),fit=safeRead('guptios-fit','cover');desktop.style.backgroundImage=theme==='teal'?'none':theme==='night'?'radial-gradient(ellipse at 65% 70%,#384551,#172330 70%)':"url('wallpaper.png')";desktop.style.backgroundColor=theme==='night'?'#172330':'#008080';desktop.style.backgroundSize=fit==='contain'?'contain':'cover';const sunset=theme==='sunset';document.documentElement.classList.toggle('sunset',sunset);const toggle=$('#sunset-toggle');toggle.setAttribute('aria-pressed',String(sunset));toggle.textContent=sunset?'☀':'☾';toggle.title=sunset?'Return to previous appearance':'Switch to Sunset mode';if(sunset){desktop.style.backgroundColor='#252035';desktop.style.backgroundImage="linear-gradient(180deg,#322945 0%,#914a63 40%,#ff9960 67%,#624650 84%,#352d40 100%),url('wallpaper.png')"}document.querySelector('meta[name="theme-color"]').content=sunset?'#282433':'#c0c0c0';const monitor=$('#monitor-screen');if(monitor){monitor.style.backgroundImage=desktop.style.backgroundImage;monitor.style.backgroundColor=desktop.style.backgroundColor}}
 function syncSettings(){const theme=safeRead('guptios-theme','meadow');$$('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme)));$('#fit-setting').value=safeRead('guptios-fit','cover');$('#sound-setting').checked=soundOn;applyTheme()}
