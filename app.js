@@ -105,12 +105,29 @@ function setupShelf(collectionId){
 
 function renderGuestNotes(){const container=$('#guest-notes');container.replaceChildren();const entries=safeRead('guptios-guestbook-v2',[]);if(!Array.isArray(entries))return;entries.forEach(n=>{const div=document.createElement('div');div.className='guest-entry';const b=document.createElement('b'),p=document.createElement('p'),t=document.createElement('time');b.textContent=n.name;p.textContent=n.message;t.textContent=new Date(n.date).toLocaleDateString();div.append(b,t,p);container.append(div)})}
 function setupTerminal(){const form=$('#terminal-form'),input=$('#terminal-input'),output=$('#terminal-output');let history=[],cursor=0;const print=text=>{const div=document.createElement('div');div.className='terminal-line';div.textContent=text;output.append(div)};form.onsubmit=e=>{e.preventDefault();const raw=input.value.trim(),cmd=raw.toLowerCase();input.value='';if(!raw)return;history.push(raw);cursor=history.length;print('C:\\GUPTI> '+raw);const aliases={about:'about',projects:'projects',bookshelf:'bookshelf',gaming:'gaming',travel:'travel',experience:'experience',achievements:'achievements',resume:'resume',notepad:'thoughts',thoughts:'thoughts',contact:'contact',music:'music',settings:'settings',readme:'readme'};if(cmd==='help')print('HELP        Show this list\nDIR         List desktop folders\nABOUT       Open About Me\nPROJECTS    Open Projects\nNOTEPAD     Open your local scratchpad\nMUSIC       Open Media Player\nSETTINGS    Change the wallpaper\nDATE        Show date and time\nVER         Show OS version\nCLS         Clear this screen\nEXIT        Close this window');else if(cmd==='dir')print(Object.keys(aliases).map(x=>'<DIR>  '+x.toUpperCase()).join('\n'));else if(cmd==='cls'||cmd==='clear')output.replaceChildren();else if(cmd==='date')print(new Date().toLocaleString());else if(cmd==='ver')print('GuptiOS 1.0 — Personal Edition');else if(cmd==='whoami')print('A curious visitor. Make yourself at home.');else if(cmd==='exit'){closeWindow('terminal');return}else if(aliases[cmd]){print('Opening '+apps[aliases[cmd]].name+'…');openApp(aliases[cmd])}else print('Unknown command. Type HELP to see what’s available.');input.scrollIntoView({block:'nearest'})};input.onkeydown=e=>{if(e.key==='ArrowUp'){e.preventDefault();cursor=Math.max(0,cursor-1);input.value=history[cursor]||''}if(e.key==='ArrowDown'){e.preventDefault();cursor=Math.min(history.length,cursor+1);input.value=history[cursor]||''}};input.focus({preventScroll:true})}
+let activeDust;
+function dustTransition(update,dusk){
+ if(activeDust)activeDust();
+ const layer=document.createElement('canvas'),w=innerWidth,h=innerHeight;
+ layer.width=w;layer.height=h;layer.setAttribute('aria-hidden','true');
+ layer.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20000;view-transition-name:theme-ash';
+ const ctx=layer.getContext('2d');if(!ctx){update();return}
+ const colors=dusk?['#edd3aa','#a48973','#564855','#2a2937']:['#ab7c79','#cb9981','#514757','#827180'];
+ const grains=Array.from({length:Math.min(1100,Math.round(w*h/650))},()=>{const x=Math.random()*w,y=Math.random()*h;return {x,y,b:860*(x+128)/(w+256),life:190+Math.random()*225,v:20+Math.random()*85,r:1+Math.random()**2*4,s:Math.random()*7,c:colors[Math.floor(Math.random()*4)]}});
+ let frame,stopped=false;
+ const vt=document.startViewTransition(()=>{update();if(!stopped)document.body.append(layer)});
+ function clean(){stopped=true;cancelAnimationFrame(frame);layer.remove();if(activeDust===stop)activeDust=null}
+ function stop(){vt.skipTransition();clean()}
+ activeDust=stop;
+ vt.ready.then(()=>{if(stopped)return;const start=performance.now();function draw(now){const t=now-start;ctx.clearRect(0,0,w,h);for(const g of grains){const a=(t-g.b)/g.life;if(a<0||a>=1)continue;const r=g.r*(1-a*.75),x=g.x-a*g.v,y=g.y-a*a*g.v*.8+Math.sin(a*5+g.s)*a*12;ctx.globalAlpha=(1-a)*.92;ctx.fillStyle=g.c;ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r*1.6,y+r*.35);ctx.lineTo(x-r,y+r*.8);ctx.fill()}if(t<1120)frame=requestAnimationFrame(draw)}frame=requestAnimationFrame(draw)}).catch(()=>{});
+ vt.finished.then(clean,clean)
+}
 function chooseTheme(next){
  const previous=safeRead('guptios-theme','meadow');
  if(previous===next)return;
  safeSave('guptios-theme',next);
  const update=()=>{if($('#fit-setting'))syncSettings();else applyTheme()};
- if((previous==='sunset'||next==='sunset') && document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){document.startViewTransition(update)}else{update()}
+ if((previous==='sunset'||next==='sunset') && document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches){dustTransition(update,next==='sunset')}else{update()}
 }
 function applyTheme(){const theme=safeRead('guptios-theme','meadow'),fit=safeRead('guptios-fit','cover');desktop.style.backgroundImage=theme==='teal'?'none':theme==='night'?'radial-gradient(ellipse at 65% 70%,#384551,#172330 70%)':"url('wallpaper.png')";desktop.style.backgroundColor=theme==='night'?'#172330':'#008080';desktop.style.backgroundSize=fit==='contain'?'contain':'cover';const sunset=theme==='sunset';document.documentElement.classList.toggle('sunset',sunset);const toggle=$('#sunset-toggle');toggle.setAttribute('aria-pressed',String(sunset));toggle.textContent=sunset?'☀':'☾';toggle.title=sunset?'Return to previous appearance':'Switch to Sunset mode';if(sunset){desktop.style.backgroundColor='#252035';desktop.style.backgroundImage="linear-gradient(180deg,#322945 0%,#914a63 40%,#ff9960 67%,#624650 84%,#352d40 100%),url('wallpaper.png')"}document.querySelector('meta[name="theme-color"]').content=sunset?'#282433':'#c0c0c0';const monitor=$('#monitor-screen');if(monitor){monitor.style.backgroundImage=desktop.style.backgroundImage;monitor.style.backgroundColor=desktop.style.backgroundColor}}
 function syncSettings(){const theme=safeRead('guptios-theme','meadow');$$('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===theme)));$('#fit-setting').value=safeRead('guptios-fit','cover');$('#sound-setting').checked=soundOn;applyTheme()}
