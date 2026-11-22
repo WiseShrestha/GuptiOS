@@ -8,6 +8,8 @@ const codePlatforms = {
   leetcode: { name: 'LeetCode', short: 'LC', color: '#d8901a', kind: 'cp' },
   codeforces: { name: 'Codeforces', short: 'CF', color: '#1f73b7', kind: 'cp' },
   codechef: { name: 'CodeChef', short: 'CC', color: '#7b4a26', kind: 'cp' },
+  geeksforgeeks: { name: 'GeeksforGeeks', short: 'GfG', color: '#2f8d46', kind: 'cp' },
+  hackerrank: { name: 'HackerRank', short: 'HR', color: '#39424e', kind: 'cp' },
 };
 let codeStatsRequest = null, chartWidth = 560;
 
@@ -118,26 +120,27 @@ function difficulty(lc) {
 
 function overview(data) {
   const p = data.platforms, ok = id => p[id] && !p[id].error;
-  const cp = ['leetcode', 'codeforces', 'codechef'].filter(ok);
-  const solved = cp.reduce((n, id) => n + (id === 'leetcode' ? p[id].solved.total : p[id].solved || 0), 0);
+  const cp = Object.keys(codePlatforms).filter(id => codePlatforms[id].kind === 'cp' && ok(id));
+  const rated = cp.filter(id => 'rating' in p[id]);
+  const solved = cp.reduce((n, id) => n + (typeof p[id].solved === 'object' ? p[id].solved.total : p[id].solved || 0), 0);
   const contests = cp.reduce((n, id) => n + (p[id].contests || 0), 0);
   const cal = mergeCalendars(cp.map(id => p[id].calendar));
   const s = streaks(cal);
-  const best = cp.map(id => ({ id, r: p[id].rating })).filter(x => x.r).sort((a, b) => b.r - a.r)[0];
+  const best = rated.map(id => ({ id, r: p[id].rating })).filter(x => x.r).sort((a, b) => b.r - a.r)[0];
   let html = '';
   html += panel('Problem solving', cp.length ? `
-    <div class="code-tiles">${tile('Questions solved', fmt(solved), cp.map(id => codePlatforms[id].short).join(' + '))}${tile('Active days', fmt(s.active), 'last 365 days')}${tile('Contests', fmt(contests), 'rated rounds')}${tile('Best rating', best ? fmt(best.r) : '—', best ? codePlatforms[best.id].name : 'unrated')}</div>
+    <div class="code-tiles">${tile('Questions solved', fmt(solved), `across ${cp.length} platform${cp.length === 1 ? '' : 's'}`)}${tile('Active days', fmt(s.active), 'last 365 days')}${tile('Contests', fmt(contests), 'rated rounds')}${tile('Best rating', best ? fmt(best.r) : '—', best ? codePlatforms[best.id].name : 'unrated')}</div>
     ${heatmap(cal, 'submission')}
     <div class="streak-line"><span>Current streak <b>${s.current}</b> day${s.current === 1 ? '' : 's'}</span><span>Longest streak <b>${s.best}</b> day${s.best === 1 ? '' : 's'}</span></div>`
     : `<div class="code-empty">${icon('trophy')}<div><b>No judges connected yet.</b><p>LeetCode, Codeforces and CodeChef stats will appear here once their handles are added to <code>coding-profiles.json</code>.</p></div></div>`);
   if (cp.length) {
     html += `<div class="code-columns">`;
     if (ok('leetcode')) html += panel('Problems by difficulty', difficulty(p.leetcode), '<span>LEETCODE</span>');
-    html += panel('Contest ratings', `<ul class="rating-list">${cp.map(id => `<li><span class="plat-dot" style="background:${codePlatforms[id].color}"></span><span>${codePlatforms[id].name}</span><b>${fmt(p[id].rating)}</b><small>max ${fmt(maxRating(p[id]))}</small></li>`).join('')}</ul>`);
+    html += panel('Contest ratings', `<ul class="rating-list">${rated.map(id => `<li><span class="plat-dot" style="background:${codePlatforms[id].color}"></span><span>${codePlatforms[id].name}</span><b>${fmt(p[id].rating)}</b><small>max ${fmt(maxRating(p[id]))}</small></li>`).join('')}</ul>`);
     html += `</div>`;
     const topics = (p.leetcode?.topics?.length ? p.leetcode.topics : p.codeforces?.topics) || [];
     if (topics.length) html += panel('Strongest topics', barList(topics.slice(0, 8)), `<span>${p.leetcode?.topics?.length ? 'LEETCODE' : 'CODEFORCES'}</span>`);
-    html += panel('Rating journey', ratingChart(cp.map(id => ({ ...codePlatforms[id], history: p[id].history }))));
+    html += panel('Rating journey', ratingChart(rated.map(id => ({ ...codePlatforms[id], history: p[id].history }))));
   }
   if (ok('github')) {
     const g = p.github;
@@ -160,8 +163,11 @@ function platformPage(id, d) {
     if (id === 'leetcode') body += `<div class="code-tiles">${tile('Solved', fmt(d.solved.total), `of ${fmt(d.available?.all)}`)}${tile('Contest rating', fmt(d.rating), d.topPercentage != null ? `top ${d.topPercentage}%` : 'unrated')}${tile('Contests', fmt(d.contests))}${tile('Global rank', fmt(d.ranking))}</div>${panel('Problems by difficulty', difficulty(d))}`;
     if (id === 'codeforces') body += `<div class="code-tiles">${tile('Rating', fmt(d.rating), esc(d.rank))}${tile('Max rating', fmt(d.maxRating), esc(d.maxRank))}${tile('Solved', fmt(d.solved), 'unique problems')}${tile('Contests', fmt(d.contests))}</div>`;
     if (id === 'codechef') body += `<div class="code-tiles">${tile('Rating', fmt(d.rating), d.stars ? '★'.repeat(d.stars) : 'unrated')}${tile('Highest', fmt(d.maxRating))}${tile('Solved', fmt(d.solved))}${tile('Contests', fmt(d.contests), d.globalRank ? `global #${fmt(d.globalRank)}` : '')}</div>`;
-    body += panel('Submissions', heatmap(d.calendar || {}, 'submission') + `<div class="streak-line"><span>Active days <b>${s.active}</b></span><span>Current streak <b>${s.current}</b></span><span>Longest streak <b>${s.best}</b></span></div>`);
-    body += panel('Rating history', ratingChart([{ ...meta, history: d.history }]));
+    if (id === 'geeksforgeeks') body += `<div class="code-tiles">${tile('Solved', fmt(d.solved))}${tile('Coding score', fmt(d.score))}${tile('This month', fmt(d.monthlyScore), 'score')}${tile('POTD streak', fmt(d.potdStreak), d.instituteRank ? `institute #${fmt(d.instituteRank)}` : 'longest')}</div>`;
+    if (id === 'hackerrank') body += `<div class="code-tiles">${tile('Solved', fmt(d.solved))}${tile('Badges', fmt(d.badgeList.length))}${tile('Stars', fmt(d.stars))}${tile('Top badge', esc(d.badgeList.slice().sort((a, b) => b.stars - a.stars)[0]?.name || '—'))}</div>`
+      + panel('Skill badges', d.badgeList.length ? `<ul class="rating-list">${d.badgeList.map(b => `<li><span class="plat-dot" style="background:${meta.color}"></span><span>${esc(b.name)}</span><b class="badge-stars">${'★'.repeat(b.stars)}${'☆'.repeat(Math.max(0, 5 - b.stars))}</b><small>${b.solved} solved</small></li>`).join('')}</ul>` : '<div class="code-empty-note">No badges yet.</div>');
+    if (d.calendar) body += panel('Submissions', heatmap(d.calendar, 'submission') + `<div class="streak-line"><span>Active days <b>${s.active}</b></span><span>Current streak <b>${s.current}</b></span><span>Longest streak <b>${s.best}</b></span></div>`);
+    if (d.history) body += panel('Rating history', ratingChart([{ ...meta, history: d.history }]));
     if (d.topics?.length) body += panel('Topics', barList(d.topics.slice(0, 10)));
     if (d.badges?.length) body += panel('Badges', `<div class="profile-interests">${d.badges.map(b => `<span>${esc(b)}</span>`).join('')}</div>`);
   }

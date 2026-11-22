@@ -5,7 +5,8 @@ Shresth Gupta’s personal portfolio, inspired by retro desktop interfaces.
 Static HTML, CSS, and JavaScript. No build step is required.
 
 ## Code Stats
-The **Code Stats** window gathers GitHub, LeetCode, Codeforces and CodeChef
+The **Code Stats** window gathers GitHub, LeetCode, Codeforces, CodeChef,
+GeeksforGeeks and HackerRank
 progress in one place: questions solved, streaks, a submission heatmap,
 contest ratings, topics and repositories.
 
