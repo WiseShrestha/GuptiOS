@@ -155,7 +155,36 @@ async function codechef(handle) {
   };
 }
 
-const fetchers = { github, leetcode, codeforces, codechef };
+async function geeksforgeeks(handle) {
+  const html = await request(`https://www.geeksforgeeks.org/user/${handle}/`, {}, 'text');
+  // The profile data is embedded in the page as escaped JSON: \"score\":12
+  const field = name => { const m = html.match(new RegExp(`\\\\?"${name}\\\\?":\\s*(\\d+)`)); return m ? Number(m[1]) : null };
+  if (field('total_problems_solved') == null) throw new Error(`GeeksforGeeks user ${handle} not found`);
+  const rank = html.match(/\\?"institute_rank\\?":\s*\\?"?(\d+)/)?.[1];
+  return {
+    url: `https://www.geeksforgeeks.org/user/${handle}/`,
+    solved: field('total_problems_solved'),
+    score: field('score'),
+    monthlyScore: field('monthly_score'),
+    instituteRank: rank ? Number(rank) : null,
+    potdStreak: field('pod_solved_longest_streak'),
+  };
+}
+
+async function hackerrank(handle) {
+  const base = `https://www.hackerrank.com/rest/hackers/${handle}`;
+  const badges = (await request(`${base}/badges`)).models || [];
+  const history = await request(`${base}/submission_histories`).catch(() => ({}));
+  return {
+    url: `https://www.hackerrank.com/profile/${handle}`,
+    solved: badges.reduce((n, b) => n + (b.solved || 0), 0),
+    stars: badges.reduce((n, b) => n + (b.stars || 0), 0),
+    badgeList: badges.map(b => ({ name: b.badge_name, stars: b.stars || 0, solved: b.solved || 0 })),
+    calendar: Object.fromEntries(Object.entries(history).map(([d, n]) => [d, Number(n)])),
+  };
+}
+
+const fetchers = { github, leetcode, codeforces, codechef, geeksforgeeks, hackerrank };
 const handles = JSON.parse(await readFile(profilesFile, 'utf8'));
 const previous = await readFile(outputFile, 'utf8').then(JSON.parse).catch(() => ({ platforms: {} }));
 const platforms = {};
@@ -167,7 +196,7 @@ for (const [id, fetcher] of Object.entries(fetchers)) {
   if (!handle) continue;
   try {
     const data = await fetcher(handle);
-    data.calendar = Object.fromEntries(Object.entries(data.calendar).filter(([date]) => date >= yearAgo).sort());
+    if (data.calendar) data.calendar = Object.fromEntries(Object.entries(data.calendar).filter(([date]) => date >= yearAgo).sort());
     platforms[id] = { handle, updatedAt: new Date().toISOString(), ...data };
     console.log(`✓ ${id}: ${handle}`);
   } catch (err) {
