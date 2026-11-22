@@ -42,7 +42,7 @@ const apps={
  terminal:{name:'MS-DOS Prompt',icon:'terminal',width:570,height:360},
  shutdown:{name:'Shut Down GuptiOS',icon:'power',width:410,height:290}
 };
-const desktopApps=['about','projects','codestats','experience','achievements','thoughts','contact','readme','resume','guestbook','music','terminal','travel','bookshelf','gaming'];
+const desktopApps=['about','projects','terminal','experience','achievements','thoughts','contact','readme','resume','guestbook','music','codestats','travel','bookshelf','gaming'];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const safeRead=(key,fallback)=>{try{const value=JSON.parse(localStorage.getItem(key));return value??fallback}catch{return fallback}};
 const safeSave=(key,value)=>{try{localStorage.setItem(key,JSON.stringify(value));return true}catch{return false}};
