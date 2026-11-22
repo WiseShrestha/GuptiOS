@@ -1,0 +1,85 @@
+{
+ "generatedAt": "2026-11-22T17:27:28.337Z",
+ "platforms": {
+  "github": {
+   "handle": "WiseShrestha",
+   "updatedAt": "2026-11-22T17:27:28.337Z",
+   "name": "Shresth Gupta",
+   "url": "https://github.com/WiseShrestha",
+   "publicRepos": 9,
+   "followers": 0,
+   "stars": 0,
+   "contributions": 145,
+   "languages": [
+    {
+     "name": "HTML",
+     "count": 2
+    },
+    {
+     "name": "TypeScript",
+     "count": 2
+    },
+    {
+     "name": "C",
+     "count": 1
+    },
+    {
+     "name": "JavaScript",
+     "count": 1
+    },
+    {
+     "name": "Jupyter Notebook",
+     "count": 1
+    },
+    {
+     "name": "Python",
+     "count": 1
+    }
+   ],
+   "repos": [
+    {
+     "name": "GuptiOS",
+     "url": "https://github.com/WiseShrestha/GuptiOS",
+     "description": "",
+     "language": "HTML",
+     "stars": 0
+    },
+    {
+     "name": "HelpLoop",
+     "url": "https://github.com/WiseShrestha/HelpLoop",
+     "description": "공부품앗이",
+     "language": "TypeScript",
+     "stars": 0
+    },
+    {
+     "name": "EE217",
+     "url": "https://github.com/WiseShrestha/EE217",
+     "description": "",
+     "language": "C",
+     "stars": 0
+    },
+    {
+     "name": "Bookinator",
+     "url": "https://github.com/WiseShrestha/Bookinator",
+     "description": "",
+     "language": "TypeScript",
+     "stars": 0
+    }
+   ],
+   "calendar": {
+    "2026-10-31": 5,
+    "2026-11-02": 1,
+    "2026-11-03": 2,
+    "2026-11-08": 3,
+    "2026-11-09": 1,
+    "2026-11-14": 1,
+    "2026-11-15": 56,
+    "2026-11-16": 2,
+    "2026-11-17": 15,
+    "2026-11-18": 26,
+    "2026-11-19": 25,
+    "2026-11-20": 8
+   }
+  }
+ }
+}
