@@ -1,9 +1,9 @@
 {
- "generatedAt": "2026-11-22T17:27:28.337Z",
+ "generatedAt": "2026-11-22T17:36:21.818Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-22T17:27:28.337Z",
+   "updatedAt": "2026-11-22T17:36:13.311Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
    "publicRepos": 9,
@@ -80,6 +80,139 @@
     "2026-11-19": 25,
     "2026-11-20": 8
    }
+  },
+  "leetcode": {
+   "handle": "YIx2ixgVqE",
+   "updatedAt": "2026-11-22T17:36:13.529Z",
+   "url": "https://leetcode.com/u/YIx2ixgVqE/",
+   "solved": {
+    "total": 5,
+    "easy": 5,
+    "medium": 0,
+    "hard": 0
+   },
+   "available": {
+    "all": 4123,
+    "easy": 978,
+    "medium": 2152,
+    "hard": 993
+   },
+   "ranking": 5000001,
+   "streak": 0,
+   "activeDays": 0,
+   "rating": null,
+   "contests": 0,
+   "topPercentage": null,
+   "history": [],
+   "topics": [
+    {
+     "name": "Array",
+     "count": 3
+    },
+    {
+     "name": "Math",
+     "count": 2
+    },
+    {
+     "name": "Simulation",
+     "count": 2
+    }
+   ],
+   "badges": [],
+   "calendar": {}
+  },
+  "codeforces": {
+   "handle": "shresthwastaken",
+   "updatedAt": "2026-11-22T17:36:20.459Z",
+   "url": "https://codeforces.com/profile/shresthwastaken",
+   "rating": null,
+   "maxRating": null,
+   "rank": "unrated",
+   "maxRank": "unrated",
+   "contests": 0,
+   "solved": 3,
+   "history": [],
+   "topics": [
+    {
+     "name": "math",
+     "count": 2
+    },
+    {
+     "name": "strings",
+     "count": 1
+    },
+    {
+     "name": "brute force",
+     "count": 1
+    }
+   ],
+   "calendar": {}
+  },
+  "codechef": {
+   "handle": "luctificus",
+   "updatedAt": "2026-11-22T17:36:20.646Z",
+   "url": "https://www.codechef.com/users/luctificus",
+   "name": "Shresth Gupta",
+   "rating": 1003,
+   "maxRating": 1107,
+   "stars": 1,
+   "globalRank": null,
+   "countryRank": null,
+   "contests": 5,
+   "solved": 308,
+   "history": [
+    {
+     "date": "2024-11-13",
+     "rating": 1030,
+     "name": "Starters 160 (Rated)"
+    },
+    {
+     "date": "2024-11-20",
+     "rating": 1107,
+     "name": "Starters 161 (Rated)"
+    },
+    {
+     "date": "2024-12-04",
+     "rating": 1061,
+     "name": "Starters 163 (Rated)"
+    },
+    {
+     "date": "2025-01-01",
+     "rating": 987,
+     "name": "Starters 167 (Rated)"
+    },
+    {
+     "date": "2025-01-29",
+     "rating": 1003,
+     "name": "Starters 171 (Rated)"
+    }
+   ],
+   "calendar": {}
+  },
+  "geeksforgeeks": {
+   "handle": "shresthv6o3",
+   "updatedAt": "2026-11-22T17:36:21.433Z",
+   "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
+   "solved": 0,
+   "score": 0,
+   "monthlyScore": 0,
+   "instituteRank": null,
+   "potdStreak": 0
+  },
+  "hackerrank": {
+   "handle": "shrestha360_17",
+   "updatedAt": "2026-11-22T17:36:21.818Z",
+   "url": "https://www.hackerrank.com/profile/shrestha360_17",
+   "solved": 4,
+   "stars": 1,
+   "badgeList": [
+    {
+     "name": "Java",
+     "stars": 1,
+     "solved": 4
+    }
+   ],
+   "calendar": {}
   }
  }
 }
