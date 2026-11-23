@@ -1,18 +1,18 @@
 {
- "generatedAt": "2026-11-22T17:36:21.818Z",
+ "generatedAt": "2026-11-23T12:31:13.226Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-22T17:36:13.311Z",
+   "updatedAt": "2026-11-23T12:31:04.649Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
-   "publicRepos": 9,
+   "publicRepos": 10,
    "followers": 0,
    "stars": 0,
-   "contributions": 145,
+   "contributions": 153,
    "languages": [
     {
-     "name": "HTML",
+     "name": "JavaScript",
      "count": 2
     },
     {
@@ -24,15 +24,15 @@
      "count": 1
     },
     {
-     "name": "JavaScript",
-     "count": 1
-    },
-    {
      "name": "Jupyter Notebook",
      "count": 1
     },
     {
      "name": "Python",
+     "count": 1
+    },
+    {
+     "name": "HTML",
      "count": 1
     }
    ],
@@ -41,7 +41,7 @@
      "name": "GuptiOS",
      "url": "https://github.com/WiseShrestha/GuptiOS",
      "description": "",
-     "language": "HTML",
+     "language": "JavaScript",
      "stars": 0
     },
     {
@@ -78,12 +78,14 @@
     "2026-11-17": 15,
     "2026-11-18": 26,
     "2026-11-19": 25,
-    "2026-11-20": 8
+    "2026-11-20": 8,
+    "2026-11-22": 3,
+    "2026-11-23": 5
    }
   },
   "leetcode": {
    "handle": "YIx2ixgVqE",
-   "updatedAt": "2026-11-22T17:36:13.529Z",
+   "updatedAt": "2026-11-23T12:31:04.860Z",
    "url": "https://leetcode.com/u/YIx2ixgVqE/",
    "solved": {
     "total": 5,
@@ -123,7 +125,7 @@
   },
   "codeforces": {
    "handle": "shresthwastaken",
-   "updatedAt": "2026-11-22T17:36:20.459Z",
+   "updatedAt": "2026-11-23T12:31:12.021Z",
    "url": "https://codeforces.com/profile/shresthwastaken",
    "rating": null,
    "maxRating": null,
@@ -150,7 +152,7 @@
   },
   "codechef": {
    "handle": "luctificus",
-   "updatedAt": "2026-11-22T17:36:20.646Z",
+   "updatedAt": "2026-11-23T12:31:12.252Z",
    "url": "https://www.codechef.com/users/luctificus",
    "name": "Shresth Gupta",
    "rating": 1003,
@@ -191,7 +193,7 @@
   },
   "geeksforgeeks": {
    "handle": "shresthv6o3",
-   "updatedAt": "2026-11-22T17:36:21.433Z",
+   "updatedAt": "2026-11-23T12:31:12.980Z",
    "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
    "solved": 0,
    "score": 0,
@@ -201,7 +203,7 @@
   },
   "hackerrank": {
    "handle": "shrestha360_17",
-   "updatedAt": "2026-11-22T17:36:21.818Z",
+   "updatedAt": "2026-11-23T12:31:13.226Z",
    "url": "https://www.hackerrank.com/profile/shrestha360_17",
    "solved": 4,
    "stars": 1,
