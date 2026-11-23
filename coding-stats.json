@@ -1,9 +1,9 @@
 {
- "generatedAt": "2026-11-23T12:31:13.226Z",
+ "generatedAt": "2026-11-23T20:12:47.767Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-23T12:31:04.649Z",
+   "updatedAt": "2026-11-23T20:12:39.604Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
    "publicRepos": 10,
@@ -85,7 +85,7 @@
   },
   "leetcode": {
    "handle": "YIx2ixgVqE",
-   "updatedAt": "2026-11-23T12:31:04.860Z",
+   "updatedAt": "2026-11-23T20:12:39.858Z",
    "url": "https://leetcode.com/u/YIx2ixgVqE/",
    "solved": {
     "total": 5,
@@ -125,7 +125,7 @@
   },
   "codeforces": {
    "handle": "shresthwastaken",
-   "updatedAt": "2026-11-23T12:31:12.021Z",
+   "updatedAt": "2026-11-23T20:12:46.924Z",
    "url": "https://codeforces.com/profile/shresthwastaken",
    "rating": null,
    "maxRating": null,
@@ -152,7 +152,7 @@
   },
   "codechef": {
    "handle": "luctificus",
-   "updatedAt": "2026-11-23T12:31:12.252Z",
+   "updatedAt": "2026-11-23T20:12:47.021Z",
    "url": "https://www.codechef.com/users/luctificus",
    "name": "Shresth Gupta",
    "rating": 1003,
@@ -193,7 +193,7 @@
   },
   "geeksforgeeks": {
    "handle": "shresthv6o3",
-   "updatedAt": "2026-11-23T12:31:12.980Z",
+   "updatedAt": "2026-11-23T20:12:47.604Z",
    "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
    "solved": 0,
    "score": 0,
@@ -203,8 +203,20 @@
   },
   "hackerrank": {
    "handle": "wiseraunak_gupta",
+   "updatedAt": "2026-11-23T20:12:47.767Z",
    "url": "https://www.hackerrank.com/profile/wiseraunak_gupta",
-   "error": "Stats for this profile will appear after the next refresh."
+   "solved": 6,
+   "stars": 1,
+   "badgeList": [
+    {
+     "name": "Python",
+     "stars": 1,
+     "solved": 6
+    }
+   ],
+   "calendar": {
+    "2026-11-23": 7
+   }
   }
  }
 }
