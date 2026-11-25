@@ -1,9 +1,9 @@
 {
- "generatedAt": "2026-11-24T13:38:49.573Z",
+ "generatedAt": "2026-11-25T12:48:56.750Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-24T13:38:40.668Z",
+   "updatedAt": "2026-11-25T12:48:47.930Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
    "publicRepos": 11,
@@ -38,17 +38,17 @@
    ],
    "repos": [
     {
-     "name": "WiseShrestha",
-     "url": "https://github.com/WiseShrestha/WiseShrestha",
-     "description": "",
-     "language": "",
-     "stars": 0
-    },
-    {
      "name": "GuptiOS",
      "url": "https://github.com/WiseShrestha/GuptiOS",
      "description": "",
      "language": "JavaScript",
+     "stars": 0
+    },
+    {
+     "name": "WiseShrestha",
+     "url": "https://github.com/WiseShrestha/WiseShrestha",
+     "description": "",
+     "language": "",
      "stars": 0
     },
     {
@@ -86,7 +86,7 @@
   },
   "leetcode": {
    "handle": "YIx2ixgVqE",
-   "updatedAt": "2026-11-24T13:38:40.881Z",
+   "updatedAt": "2026-11-25T12:48:48.133Z",
    "url": "https://leetcode.com/u/YIx2ixgVqE/",
    "solved": {
     "total": 5,
@@ -95,10 +95,10 @@
     "hard": 0
    },
    "available": {
-    "all": 4123,
+    "all": 4124,
     "easy": 978,
     "medium": 2152,
-    "hard": 993
+    "hard": 994
    },
    "ranking": 5000001,
    "streak": 0,
@@ -126,7 +126,7 @@
   },
   "codeforces": {
    "handle": "shresthwastaken",
-   "updatedAt": "2026-11-24T13:38:48.008Z",
+   "updatedAt": "2026-11-25T12:48:55.192Z",
    "url": "https://codeforces.com/profile/shresthwastaken",
    "rating": null,
    "maxRating": null,
@@ -153,7 +153,7 @@
   },
   "codechef": {
    "handle": "luctificus",
-   "updatedAt": "2026-11-24T13:38:48.373Z",
+   "updatedAt": "2026-11-25T12:48:55.719Z",
    "url": "https://www.codechef.com/users/luctificus",
    "name": "Shresth Gupta",
    "rating": 1003,
@@ -194,7 +194,7 @@
   },
   "geeksforgeeks": {
    "handle": "shresthv6o3",
-   "updatedAt": "2026-11-24T13:38:49.098Z",
+   "updatedAt": "2026-11-25T12:48:56.374Z",
    "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
    "solved": 0,
    "score": 0,
@@ -204,19 +204,20 @@
   },
   "hackerrank": {
    "handle": "wiseraunak_gupta",
-   "updatedAt": "2026-11-24T13:38:49.573Z",
+   "updatedAt": "2026-11-25T12:48:56.749Z",
    "url": "https://www.hackerrank.com/profile/wiseraunak_gupta",
-   "solved": 6,
-   "stars": 1,
+   "solved": 8,
+   "stars": 2,
    "badgeList": [
     {
      "name": "Python",
-     "stars": 1,
-     "solved": 6
+     "stars": 2,
+     "solved": 8
     }
    ],
    "calendar": {
-    "2026-11-23": 7
+    "2026-11-23": 7,
+    "2026-11-25": 5
    }
   }
  }
