@@ -1,15 +1,15 @@
 {
- "generatedAt": "2026-11-25T12:48:56.750Z",
+ "generatedAt": "2026-11-26T12:27:22.708Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-25T12:48:47.930Z",
+   "updatedAt": "2026-11-26T12:27:13.926Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
-   "publicRepos": 11,
+   "publicRepos": 12,
    "followers": 0,
    "stars": 0,
-   "contributions": 159,
+   "contributions": 163,
    "languages": [
     {
      "name": "JavaScript",
@@ -81,12 +81,14 @@
     "2026-11-20": 8,
     "2026-11-22": 3,
     "2026-11-23": 6,
-    "2026-11-24": 5
+    "2026-11-24": 5,
+    "2026-11-25": 1,
+    "2026-11-26": 3
    }
   },
   "leetcode": {
    "handle": "YIx2ixgVqE",
-   "updatedAt": "2026-11-25T12:48:48.133Z",
+   "updatedAt": "2026-11-26T12:27:14.677Z",
    "url": "https://leetcode.com/u/YIx2ixgVqE/",
    "solved": {
     "total": 5,
@@ -126,7 +128,7 @@
   },
   "codeforces": {
    "handle": "shresthwastaken",
-   "updatedAt": "2026-11-25T12:48:55.192Z",
+   "updatedAt": "2026-11-26T12:27:21.587Z",
    "url": "https://codeforces.com/profile/shresthwastaken",
    "rating": null,
    "maxRating": null,
@@ -153,7 +155,7 @@
   },
   "codechef": {
    "handle": "luctificus",
-   "updatedAt": "2026-11-25T12:48:55.719Z",
+   "updatedAt": "2026-11-26T12:27:21.901Z",
    "url": "https://www.codechef.com/users/luctificus",
    "name": "Shresth Gupta",
    "rating": 1003,
@@ -194,7 +196,7 @@
   },
   "geeksforgeeks": {
    "handle": "shresthv6o3",
-   "updatedAt": "2026-11-25T12:48:56.374Z",
+   "updatedAt": "2026-11-26T12:27:22.513Z",
    "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
    "solved": 0,
    "score": 0,
@@ -204,15 +206,15 @@
   },
   "hackerrank": {
    "handle": "wiseraunak_gupta",
-   "updatedAt": "2026-11-25T12:48:56.749Z",
+   "updatedAt": "2026-11-26T12:27:22.708Z",
    "url": "https://www.hackerrank.com/profile/wiseraunak_gupta",
-   "solved": 8,
+   "solved": 9,
    "stars": 2,
    "badgeList": [
     {
      "name": "Python",
      "stars": 2,
-     "solved": 8
+     "solved": 9
     }
    ],
    "calendar": {
