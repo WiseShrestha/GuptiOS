@@ -1,15 +1,15 @@
 {
- "generatedAt": "2026-11-26T12:27:22.708Z",
+ "generatedAt": "2026-11-27T12:12:42.303Z",
  "platforms": {
   "github": {
    "handle": "WiseShrestha",
-   "updatedAt": "2026-11-26T12:27:13.926Z",
+   "updatedAt": "2026-11-27T12:12:32.307Z",
    "name": "Shresth Gupta",
    "url": "https://github.com/WiseShrestha",
    "publicRepos": 12,
    "followers": 0,
    "stars": 0,
-   "contributions": 163,
+   "contributions": 166,
    "languages": [
     {
      "name": "JavaScript",
@@ -83,12 +83,13 @@
     "2026-11-23": 6,
     "2026-11-24": 5,
     "2026-11-25": 1,
-    "2026-11-26": 3
+    "2026-11-26": 3,
+    "2026-11-27": 3
    }
   },
   "leetcode": {
    "handle": "YIx2ixgVqE",
-   "updatedAt": "2026-11-26T12:27:14.677Z",
+   "updatedAt": "2026-11-27T12:12:33.310Z",
    "url": "https://leetcode.com/u/YIx2ixgVqE/",
    "solved": {
     "total": 5,
@@ -128,7 +129,7 @@
   },
   "codeforces": {
    "handle": "shresthwastaken",
-   "updatedAt": "2026-11-26T12:27:21.587Z",
+   "updatedAt": "2026-11-27T12:12:40.438Z",
    "url": "https://codeforces.com/profile/shresthwastaken",
    "rating": null,
    "maxRating": null,
@@ -155,7 +156,7 @@
   },
   "codechef": {
    "handle": "luctificus",
-   "updatedAt": "2026-11-26T12:27:21.901Z",
+   "updatedAt": "2026-11-27T12:12:41.038Z",
    "url": "https://www.codechef.com/users/luctificus",
    "name": "Shresth Gupta",
    "rating": 1003,
@@ -196,7 +197,7 @@
   },
   "geeksforgeeks": {
    "handle": "shresthv6o3",
-   "updatedAt": "2026-11-26T12:27:22.513Z",
+   "updatedAt": "2026-11-27T12:12:41.542Z",
    "url": "https://www.geeksforgeeks.org/user/shresthv6o3/",
    "solved": 0,
    "score": 0,
@@ -206,7 +207,7 @@
   },
   "hackerrank": {
    "handle": "wiseraunak_gupta",
-   "updatedAt": "2026-11-26T12:27:22.708Z",
+   "updatedAt": "2026-11-27T12:12:42.303Z",
    "url": "https://www.hackerrank.com/profile/wiseraunak_gupta",
    "solved": 9,
    "stars": 2,
@@ -219,7 +220,7 @@
    ],
    "calendar": {
     "2026-11-23": 7,
-    "2026-11-25": 5
+    "2026-11-25": 8
    }
   }
  }
